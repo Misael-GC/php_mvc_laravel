@@ -10,6 +10,8 @@ $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $requestUri = rtrim($requestUri, '/'); 
 if ($requestUri === '') $requestUri = '/';
 
+require BASE_PATH . '/framework/Database.php';
+$db = Database::getInstance();
 $routes = require BASE_PATH . '/routes/web.php';
 
 $route = $routes[$requestUri] ?? null;
