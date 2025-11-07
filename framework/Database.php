@@ -9,7 +9,7 @@ class Database
     private function __construct()
     {
         $dsn = 'mysql:host=localhost;dbname=web_php;charset=utf8mb4';
-        $this->pdo = new PDO($dsn, 'root', '');
+        $this->pdo = new PDO($dsn, 'root', 'Misael_12');
     }
 
     public static function getInstance()
