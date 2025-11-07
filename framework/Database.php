@@ -4,6 +4,7 @@ class Database
 {
     private static $instance = null;
     private $pdo;
+    private $stmt;
 
     private function __construct()
     {
@@ -24,7 +25,23 @@ class Database
         return $this->pdo;
     }
 
-    public function query($sql){
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    public function query($sql, $params = []){
+        $this->stmt = $this->pdo->prepare($sql);
+        $this->stmt->execute($params);
+        return $this;
+    }
+
+    public function get(){
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function firstOrFail(){
+        $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            http_response_code(404);
+            echo '404 Not Found';
+            exit;
+        }
+        return $result;
     }
 }

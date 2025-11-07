@@ -7,7 +7,11 @@
 
 define('BASE_PATH', dirname(__DIR__));
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$requestUri = rtrim($requestUri, '/'); 
+// var_dump($requestUri);
+$requestUri = rtrim($requestUri, '/');
+
+// die();
+
 if ($requestUri === '') $requestUri = '/';
 
 require BASE_PATH . '/framework/Database.php';
