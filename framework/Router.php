@@ -1,7 +1,7 @@
 <?php
 
 namespace Framework;
-
+use Framework\Middleware\Middleware;
 class Router
 {
     protected $routes = [];
@@ -55,9 +55,7 @@ class Router
         $middleware = $this->routes[$method][$uri]['middleware'] ?? null;
 
         if($middleware){
-            // (new $middleware())();
-            $middleware = new $middleware();
-            $middleware();
+            Middleware::run(new $middleware);
         }
 
         [$controller, $method] = $action;
