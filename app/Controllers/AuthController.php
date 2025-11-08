@@ -33,4 +33,10 @@ class AuthController{
             'errors' =>$validator->errors(),
         ]);
     }
+
+    public function logout(){
+        unset($_SESSION['user']);
+        session_destroy();
+        redirect('/');
+    }
 }

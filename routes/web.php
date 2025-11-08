@@ -20,3 +20,4 @@ $router->delete('/links/delete', [LinksControllers::class, 'delete'], Authentica
 
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'authenticate']);
+$router->post('/logout', [AuthController::class, 'logout'], Authenticated::class);
