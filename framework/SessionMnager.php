@@ -18,9 +18,14 @@ class SessionMnager{
         $value = $this->get('flash_' . $key . $default);
 
         if($value !== null){
-            unset($_SESSION['flash' . $key]);
+            // unset($_SESSION['flash' . $key]);
+            $this->remove('flash_' . $key);
         }
 
         return $value;
+    }
+
+    public function remove(string $key):void{
+        unset($_SESSION[$key]);
     }
 }

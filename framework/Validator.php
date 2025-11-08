@@ -51,8 +51,7 @@ class Validator
     }
 
     protected function redirectIfFailed(){
-        $session = new SessionMnager();
-        $session->setFlash('errors', $this->errors);
+        session()->setFlash('errors', $this->errors);
         back();
     }
 

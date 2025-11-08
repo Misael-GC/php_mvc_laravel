@@ -45,16 +45,7 @@
     </form>
 
     <!-- if errors -->
-    <?php if(!empty($errors)): ?>
-    <ul class="mt-4 text-red-500">
-        <!-- foreach -->
-        <?php foreach($errors as $error): ?>
-        <li class="text-xs">&rarr; <?= htmlspecialchars($error) ?></li>
-        <?php endforeach; ?>
-        <!-- endforeach -->
-    </ul>
-    <!-- endif -->
-    <?php endif; ?>
+    <?= errors() ?>
 </div>
 
 <?php require __DIR__ . '/partials/footer.php'; ?>
