@@ -67,3 +67,10 @@ if(!function_exists('partials')){
         require root_path('resources/partials/' . $partial);
     }
 }
+
+
+if (!function_exists('isAuthenticade')){
+    function isAuthenticade(): bool{
+        return (bool) ($_SESSION['user'] ?? false);
+    }
+}

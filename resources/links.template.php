@@ -19,30 +19,33 @@
                 </a>
             </h3>
 
-            <p class="mt-2 text-sm text-gray-600"><?= $link['description'] ?></p>
-            <div class="flex items-center justify-end gap-4 mt-6">
-                <form action="/links/delete" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar?');">
-                    <input type="hidden" name="_method" value="DELETE">        
-                    <input type="hidden" name="id" value="<?= $link['id'] ?>">
+            <?php if(isAuthenticade()): ?>
+                <p class="mt-2 text-sm text-gray-600"><?= $link['description'] ?></p>
+                <div class="flex items-center justify-end gap-4 mt-6">
+                    <form action="/links/delete" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar?');">
+                        <input type="hidden" name="_method" value="DELETE">        
+                        <input type="hidden" name="id" value="<?= $link['id'] ?>">
 
-                    <button type="submit" class="text-xs font-semibold bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded-md cursor-pointer">
-                        Eliminar
-                    </button>
-                </form>
+                        <button type="submit" class="text-xs font-semibold bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded-md cursor-pointer">
+                            Eliminar
+                        </button>
+                    </form>
 
-                <a href="/links/edit?id=<?= $link['id'] ?>" class="text-xs font-semibold text-gray-900 hover:text-gray-600">
-                    Editar &rarr;
-                </a>
-            </div>
+                    <a href="/links/edit?id=<?= $link['id'] ?>" class="text-xs font-semibold text-gray-900 hover:text-gray-600">
+                        Editar &rarr;
+                    </a>
+                </div>
+            <?php endif; ?>
         </article>
 
     <?php endforeach; ?>
     <!-- endforeach -->
-
 </div>
-<div class="my-16">
-    <a href="/links/create" class="text-sm font-semibold text-gray-900">
-        Registrar &rarr;
-    </a>
-</div>
+<?php if(isAuthenticade()): ?>
+    <div class="my-16">
+        <a href="/links/create" class="text-sm font-semibold text-gray-900">
+            Registrar &rarr;
+        </a>
+    </div>
+<?php endif; ?>
 <?php require __DIR__ . '/partials/footer.php'; ?>

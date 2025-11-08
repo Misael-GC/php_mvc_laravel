@@ -5,6 +5,7 @@ use App\Controllers\AboutController;
 use App\Controllers\PostController;
 use App\Controllers\LinksControllers;
 use Framework\Middleware\Authenticated;
+use App\Controllers\AuthController;
 
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/about', [AboutController::class, 'index']);
@@ -16,3 +17,5 @@ $router->post('/links/store', [LinksControllers::class, 'store'], Authenticated:
 $router->get('/links/edit', [LinksControllers::class, 'edit'], Authenticated::class);// mandar a llamar el formulario de edicion
 $router->put('/links/update', [LinksControllers::class, 'update'], Authenticated::class);// actualizar el link
 $router->delete('/links/delete', [LinksControllers::class, 'delete'], Authenticated::class);
+
+$router->get('/login', [AuthController::class, 'login']);
