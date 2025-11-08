@@ -10,16 +10,14 @@ class LinksControllers
     public function index()
     {
         $db = Database::getInstance();
-        $title = 'Proyectos';
         $links = $db->query('SELECT * FROM links ORDER BY id DESC')->get();
-        require __DIR__ . '/../../resources/links.template.php';
+        view('links.template.php', ['title' => 'Proyectos', 'links' => $links]);
     }
 
     public function create()
     {
         // Lógica para mostrar el formulario de creación de enlaces
-        $title = 'Registrar Proyecto';
-        require __DIR__ . '/../../resources/links_create.template.php';
+        view('links_create.template.php', ['title' => 'Registrar Proyecto']);
     }
 
     public function store()
@@ -47,9 +45,7 @@ class LinksControllers
             header('Location: /links');
             exit;
         }
-            $errors = $validators->errors();
-            $title = 'Registrar Proyecto';
-            require __DIR__ . '/../../resources/links_create.template.php';
+            view('links_create.template.php', ['title' => 'Registrar Proyecto', 'errors' => $validators->errors()]);
     }
 
     public function delete()
@@ -68,15 +64,13 @@ class LinksControllers
     }
 
     public function edit(){
-        $title = 'Editar Proyecto';
         $db = Database::getInstance();
-
         $link = $db->query(
             'SELECT * FROM links WHERE id = :id',
             ['id' => $_GET['id']]
         )->firstOrFail();
-        
-        require __DIR__ . '/../../resources/links_edit.template.php';
+
+        view('links_edit.template.php', ['title' => 'Editar Proyecto', 'link' => $link]);
     }
 
     public function update(){
@@ -108,8 +102,7 @@ class LinksControllers
             header('Location: /links');
             exit;
         }
-            $errors = $validators->errors();
-            $title = 'Editar Proyecto';
-            require __DIR__ . '/../../resources/links_edit.template.php';
+
+            view('links_edit.template.php', ['title' => 'Editar Proyecto', 'errors' => $validators->errors()]);
     }
 }

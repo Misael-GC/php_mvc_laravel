@@ -7,7 +7,6 @@ class AboutController
 {
     public function index()
     {
-        $title = 'Sobre mí';
-        require BASE_PATH . '/resources/about.template.php';
+        view('about.template.php', ['title' => 'Sobre mí']);
     }
 }
