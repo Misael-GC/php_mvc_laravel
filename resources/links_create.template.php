@@ -13,7 +13,7 @@
                 <input type="text" 
                 name="title" 
                 class="w-full outline-1 outline-gray-300 rounded-md px-3 py-2 text-gray-900" 
-                value="<?= $_POST['title'] ?? '' ?>">
+                value="<?= old('title') ?>">
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                 <input type="text" 
                 name="url" 
                 class="w-full outline-1 outline-gray-300 rounded-md px-3 py-2 text-gray-900" 
-                value="<?= $_POST['url'] ?? '' ?>">
+                value="<?= old('url') ?>">
             </div>
         </div>
 
@@ -32,7 +32,7 @@
             <div class="mt-2">
                 <textarea name="description" 
                 rows="2" 
-                class="w-full outline-1 outline-gray-300 rounded-md px-4 py-2 text-gray-900"><?= $_POST['description'] ?? '' ?></textarea>
+                class="w-full outline-1 outline-gray-300 rounded-md px-4 py-2 text-gray-900"><?= old('description') ?></textarea>
             </div>
         </div>
 

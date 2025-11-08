@@ -22,3 +22,17 @@ if (!function_exists('view')) {
         require root_path('resources/' . $view);
     }
 }
+
+if(!function_exists('old')){
+    function old(string $key, mixed $default = null): mixed
+    {
+        return $_POST[$key] ?? $default;
+    }
+}
+
+if(!function_exists('requestIs')){
+    function requestIs(string $uri): bool
+    {
+        return $_SERVER['REQUEST_URI'] === '/' . normalize_path($uri);
+    }
+}
