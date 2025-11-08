@@ -24,7 +24,7 @@ class LinksControllers
         $validators = new Validator($_POST, [
             'title' => 'required|min:3|max:190',
             'url' => 'required|url|max:190',
-            'description' => 'required|min:3|max:500'
+            'description' => 'required|min:10|max:500'
         ]);
 
         $errors = [];
@@ -72,5 +72,39 @@ class LinksControllers
         )->firstOrFail();
         
         require __DIR__ . '/../../resources/links_edit.template.php';
+    }
+
+    public function update(){
+        $db = Database::getInstance();
+
+        $validators = new Validator($_POST, [
+            'title' => 'required|min:3|max:190',
+            'url' => 'required|url|max:190',
+            'description' => 'required|min:10|max:500'
+        ]);
+
+        $errors = [];
+        $link = $db->query(
+                'SELECT * FROM links WHERE id = :id',
+                ['id' => $_GET['id']]
+            )->firstOrFail();
+
+        if ($validators->passes()) {
+            $db->query(
+                'UPDATE links SET title = :title, url = :url, description = :description WHERE id = :id',
+                [
+                    'title' => $_POST['title'],
+                    'url' => $_POST['url'],
+                    'description' => $_POST['description'],
+                    'id' => $_GET['id']
+                ]
+            );
+
+            header('Location: /links');
+            exit;
+        }
+            $errors = $validators->errors();
+            $title = 'Editar Proyecto';
+            require __DIR__ . '/../../resources/links_edit.template.php';
     }
 }
