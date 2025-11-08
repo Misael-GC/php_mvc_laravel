@@ -3,7 +3,7 @@
 class PostController
 {
     public function show(){
-        $db = new Database();
+        $db = Database::getInstance();
         $title = 'Proyectos';
         $post = $db->query('SELECT * FROM posts WHERE id = :id', [
             'id' => $_GET['id'] ?? null

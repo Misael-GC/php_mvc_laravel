@@ -6,9 +6,9 @@ require BASE_PATH . '/app/Controllers/PostController.php';
 require BASE_PATH . '/app/Controllers/LinksControllers.php';
 
 
-$route->get('/', [HomeController::class, 'index']);
-$route->get('/about', [AboutController::class, 'index']);
-$route->get('/post', [PostController::class, 'show']);
-$route->get('/links', [LinksControllers::class, 'index']);
-$route->get('/links/create', [LinksControllers::class, 'create']);
-$route->post('/links', [LinksControllers::class, 'store']);
+$router->get('/', [HomeController::class, 'index']);
+$router->get('/about', [AboutController::class, 'index']);
+$router->get('/post', [PostController::class, 'show']);
+$router->get('/links', [LinksControllers::class, 'index']);
+$router->get('/links/create', [LinksControllers::class, 'create']);
+$router->post('/links/store', [LinksControllers::class, 'store']);

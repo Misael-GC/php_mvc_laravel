@@ -4,7 +4,7 @@ class LinksControllers
 {
     public function index()
     {
-        $db = new Database();
+        $db = Database::getInstance();
         $title = 'Proyectos';
         $links = $db->query('SELECT * FROM links ORDER BY id DESC')->get();
         require __DIR__ . '/../../resources/links.template.php';
@@ -19,7 +19,7 @@ class LinksControllers
 
     public function store()
     {
-        $db = new Database();
+        $db = Database::getInstance();
 
         $validators = new Validator($_POST, [
             'title' => 'required|min:3|max:190',

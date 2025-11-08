@@ -2,27 +2,45 @@
 
 class Router
 {
-    public function run()
+    protected $routes = [];
+
+    public function __construct(){
+        $this->loadRoutes('web');
+    }
+
+    public function get(string $uri, array $action){
+        $this->routes['GET'][$uri] = $action;
+    }
+
+    public function post(string $uri, array $action){
+        $this->routes['POST'][$uri] = $action;
+    }
+        public function run()
     {
-        echo "Running the router...";
-    //     define('BASE_PATH', dirname(__DIR__));
-    //     $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    //     // var_dump($requestUri);
-    //     $requestUri = rtrim($requestUri, '/');
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        // $uri = rtrim($uri, '/');
+        // $uri = $uri === '' ? '/' : $uri;
+        $method = $_SERVER['REQUEST_METHOD'];
+        $action = $this->routes[$method][$uri] ?? null;
 
-    //     // die();
+        /*
+         */
+        // echo "<pre>";
+        // var_dump($this->routes);
+        // echo "</pre>";
+        // die();
 
-    //     if ($requestUri === '') $requestUri = '/';
+        if(!$action){
+            exit('Route Not Found: ' . $method . ' ' . $uri);
+        }
 
-    //     $routes = require BASE_PATH . '/routes/web.php';
+        [$controller, $method] = $action;
 
-    //     $route = $routes[$requestUri] ?? null;
+        (new $controller())->$method();
+    }
 
-    //     if ($route) {
-    //         require BASE_PATH . '/' . $route;
-    //     } else {
-    //         http_response_code(404);
-    //         echo '404 Not Found';
-    //     }
+    protected function loadRoutes(string $file){
+        $router = $this;
+        require BASE_PATH . "/routes/{$file}.php";
     }
 }
