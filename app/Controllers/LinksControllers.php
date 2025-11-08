@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-use Framework\Database;
 use Framework\Validator;
 
 
@@ -9,8 +8,7 @@ class LinksControllers
 {
     public function index()
     {
-        $db = Database::getInstance();
-        $links = $db->query('SELECT * FROM links ORDER BY id DESC')->get();
+        $links = db()->query('SELECT * FROM links ORDER BY id DESC')->get();
         view('links.template.php', ['title' => 'Proyectos', 'links' => $links]);
     }
 
@@ -22,7 +20,6 @@ class LinksControllers
 
     public function store()
     {
-        $db = Database::getInstance();
 
         $validators = new Validator($_POST, [
             'title' => 'required|min:3|max:190',
@@ -33,7 +30,7 @@ class LinksControllers
         $errors = [];
 
         if ($validators->passes()) {
-            $db->query(
+            db()->query(
                 'INSERT INTO links (title, url, description) VALUES (:title, :url, :description)',
                 [
                     'title' => $_POST['title'],
@@ -42,30 +39,25 @@ class LinksControllers
                 ]
             );
 
-            header('Location: /links');
-            exit;
+            redirect('/links');
         }
             view('links_create.template.php', ['title' => 'Registrar Proyecto', 'errors' => $validators->errors()]);
     }
 
     public function delete()
     {
-        $db = Database::getInstance();
-
         if (isset($_POST['id'])) {
-            $db->query(
+            db()->query(
                 'DELETE FROM links WHERE id = :id',
                 ['id' => $_POST['id']]
             );
         }
 
-        header('Location: /links');
-        exit;
+        redirect('/links');
     }
 
     public function edit(){
-        $db = Database::getInstance();
-        $link = $db->query(
+        $link = db()->query(
             'SELECT * FROM links WHERE id = :id',
             ['id' => $_GET['id']]
         )->firstOrFail();
@@ -74,8 +66,6 @@ class LinksControllers
     }
 
     public function update(){
-        $db = Database::getInstance();
-
         $validators = new Validator($_POST, [
             'title' => 'required|min:3|max:190',
             'url' => 'required|url|max:190',
@@ -83,13 +73,13 @@ class LinksControllers
         ]);
 
         $errors = [];
-        $link = $db->query(
+        $link = db()->query(
                 'SELECT * FROM links WHERE id = :id',
                 ['id' => $_GET['id']]
             )->firstOrFail();
 
         if ($validators->passes()) {
-            $db->query(
+            db()->query(
                 'UPDATE links SET title = :title, url = :url, description = :description WHERE id = :id',
                 [
                     'title' => $_POST['title'],
@@ -99,8 +89,7 @@ class LinksControllers
                 ]
             );
 
-            header('Location: /links');
-            exit;
+            redirect('/links');
         }
 
             view('links_edit.template.php', ['title' => 'Editar Proyecto', 'errors' => $validators->errors()]);

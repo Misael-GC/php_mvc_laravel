@@ -11,8 +11,15 @@ class Database
 
     private function __construct()
     {
-        $dsn = 'mysql:host=localhost;dbname=web_php;charset=utf8mb4';
-        $this->pdo = new PDO($dsn, 'root', 'Misael_12');
+        // $dsn = 'mysql:host=localhost;dbname=web_php;charset=utf8mb4';
+        $dsn = sprintf(
+            'mysql:host=%s;dbname=%s;charset=%s',
+            config('host', 'localhost'),
+            config('database', 'web_php'),
+            config('charset', 'utf8mb4')
+        );
+        // var_dump($dsn); die();
+        $this->pdo = new PDO($dsn, config('user'), config('password'), config('options', []));
     }
 
     public static function getInstance()
@@ -35,11 +42,11 @@ class Database
     }
 
     public function get(){
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->stmt->fetchAll();
     }
 
     public function firstOrFail(){
-        $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $this->stmt->fetch();
         if (!$result) {
             http_response_code(404);
             echo '404 Not Found';
