@@ -1,9 +1,9 @@
 <?php
 
-require BASE_PATH . '/app/Controllers/AboutController.php';
-require BASE_PATH . '/app/Controllers/HomeController.php';
-require BASE_PATH . '/app/Controllers/PostController.php';
-require BASE_PATH . '/app/Controllers/LinksControllers.php';
+use App\Controllers\HomeController;
+use App\Controllers\AboutController;
+use App\Controllers\PostController;
+use App\Controllers\LinksControllers;
 
 
 $router->get('/', [HomeController::class, 'index']);
