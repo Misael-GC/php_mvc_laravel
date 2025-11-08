@@ -19,3 +19,4 @@ $router->put('/links/update', [LinksControllers::class, 'update'], Authenticated
 $router->delete('/links/delete', [LinksControllers::class, 'delete'], Authenticated::class);
 
 $router->get('/login', [AuthController::class, 'login']);
+$router->post('/login', [AuthController::class, 'authenticate']);

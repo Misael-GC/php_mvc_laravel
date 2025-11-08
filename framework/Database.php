@@ -45,8 +45,12 @@ class Database
         return $this->stmt->fetchAll();
     }
 
+    public function first(){
+        return $this->stmt->fetch();
+    }
+
     public function firstOrFail(){
-        $result = $this->stmt->fetch();
+        $result = $this->first();
         if (!$result) {
             http_response_code(404);
             echo '404 Not Found';
