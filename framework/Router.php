@@ -15,16 +15,15 @@ class Router
     public function post(string $uri, array $action){
         $this->routes['POST'][$uri] = $action;
     }
+    public function delete(string $uri, array $action){
+        $this->routes['DELETE'][$uri] = $action;
+    }
         public function run()
     {
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        // $uri = rtrim($uri, '/');
-        // $uri = $uri === '' ? '/' : $uri;
-        $method = $_SERVER['REQUEST_METHOD'];
+        $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD']; //GET, POST, DELETE
         $action = $this->routes[$method][$uri] ?? null;
 
-        /*
-         */
         // echo "<pre>";
         // var_dump($this->routes);
         // echo "</pre>";

@@ -12,3 +12,4 @@ $router->get('/post', [PostController::class, 'show']);
 $router->get('/links', [LinksControllers::class, 'index']);
 $router->get('/links/create', [LinksControllers::class, 'create']);
 $router->post('/links/store', [LinksControllers::class, 'store']);
+$router->delete('/links/delete', [LinksControllers::class, 'delete']);

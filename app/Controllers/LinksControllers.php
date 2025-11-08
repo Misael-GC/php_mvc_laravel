@@ -46,4 +46,19 @@ class LinksControllers
             $title = 'Registrar Proyecto';
             require __DIR__ . '/../../resources/links_create.template.php';
     }
+
+    public function delete()
+    {
+        $db = Database::getInstance();
+
+        if (isset($_POST['id'])) {
+            $db->query(
+                'DELETE FROM links WHERE id = :id',
+                ['id' => $_POST['id']]
+            );
+        }
+
+        header('Location: /links');
+        exit;
+    }
 }
