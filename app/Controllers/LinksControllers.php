@@ -61,4 +61,16 @@ class LinksControllers
         header('Location: /links');
         exit;
     }
+
+    public function edit(){
+        $title = 'Editar Proyecto';
+        $db = Database::getInstance();
+
+        $link = $db->query(
+            'SELECT * FROM links WHERE id = :id',
+            ['id' => $_GET['id']]
+        )->firstOrFail();
+        
+        require __DIR__ . '/../../resources/links_edit.template.php';
+    }
 }
