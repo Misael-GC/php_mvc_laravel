@@ -74,3 +74,10 @@ if (!function_exists('isAuthenticade')){
         return (bool) ($_SESSION['user'] ?? false);
     }
 }
+
+if(!function_exists('back')){
+    function back():void{
+        header('Locatio:' . $_SERVER['HTTP_REFERER'] ?? '/');
+        exit;
+    }
+}

@@ -21,7 +21,7 @@ class LinksControllers
     public function store()
     {
 
-        $validators = new Validator($_POST, [
+        Validator::make($_POST, [
             'title' => 'required|min:3|max:190',
             'url' => 'required|url|max:190',
             'description' => 'required|min:10|max:500'
@@ -29,7 +29,6 @@ class LinksControllers
 
         $errors = [];
 
-        if ($validators->passes()) {
             db()->query(
                 'INSERT INTO links (title, url, description) VALUES (:title, :url, :description)',
                 [
@@ -40,8 +39,6 @@ class LinksControllers
             );
 
             redirect('/links');
-        }
-            view('links_create.template.php', ['title' => 'Registrar Proyecto', 'errors' => $validators->errors()]);
     }
 
     public function delete()
@@ -66,7 +63,7 @@ class LinksControllers
     }
 
     public function update(){
-        $validators = new Validator($_POST, [
+       Validator::make($_POST, [
             'title' => 'required|min:3|max:190',
             'url' => 'required|url|max:190',
             'description' => 'required|min:10|max:500'
@@ -78,7 +75,6 @@ class LinksControllers
                 ['id' => $_GET['id']]
             )->firstOrFail();
 
-        if ($validators->passes()) {
             db()->query(
                 'UPDATE links SET title = :title, url = :url, description = :description WHERE id = :id',
                 [
@@ -90,8 +86,5 @@ class LinksControllers
             );
 
             redirect('/links');
-        }
-
-            view('links_edit.template.php', ['title' => 'Editar Proyecto', 'errors' => $validators->errors()]);
     }
 }

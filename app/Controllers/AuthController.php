@@ -11,12 +11,11 @@ class AuthController{
     }
 
     public function authenticate(){
-        $validator = new Validator($_POST,[
+        Validator::make($_POST,[
             'email' => 'required|email',
             'password' => 'required|min:8|max:30',
         ]);
 
-        if($validator->passes()){
             $login = (new Authenticate())->login(
                 $_POST['email'],
                 $_POST['password']
@@ -25,10 +24,6 @@ class AuthController{
             if($login){
                 redirect('/');
             }
-        }
-        view('login.template.php', [
-            'errors' =>$validator->errors(),
-        ]);
     }
 
     public function logout(){
