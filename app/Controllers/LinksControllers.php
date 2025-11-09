@@ -38,7 +38,7 @@ class LinksControllers
                 ]
             );
 
-            redirect('/links');
+            redirect('/links/create', 'Proyecto registrado correctamente');
     }
 
     public function delete()
@@ -85,6 +85,6 @@ class LinksControllers
                 ]
             );
 
-            redirect('/links');
+            redirect('/links/edit?id=' . $link['id'], 'Proyecto actualizado correctamente');
     }
 }
