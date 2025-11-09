@@ -21,9 +21,13 @@ class AuthController{
                 $_POST['password']
             );
 
-            if($login){
-                redirect('/'); 
+            if(!$login){
+                session()->setFlash('errors', 'Invalid email or password.');
+                session()->setFlash('old_email', $_POST['email'] ?? '');
+
+                back();
             }
+            redirect('/'); 
     }
 
     public function logout(){

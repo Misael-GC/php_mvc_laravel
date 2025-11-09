@@ -52,6 +52,9 @@ class Validator
 
     protected function redirectIfFailed(){
         session()->setFlash('errors', $this->errors);
+        foreach($this->data as $key => $value){
+            session()->setFlash("old_$key", $value);
+        }
         back();
     }
 
