@@ -15,11 +15,11 @@ class SessionMnager{
     }
 
     public function getFlash(string $key, mixed $default =null):mixed{
-        $value = $this->get('flash_' . $key . $default);
+        $value = $this->get('flash_' . $key, $default);
 
         if($value !== null){
             // unset($_SESSION['flash' . $key]);
-            $this->remove('flash_' . $key);
+            $this->remove('flash_' . $key,);
         }
 
         return $value;
