@@ -2,6 +2,12 @@
 namespace Framework;
 
 class SessionMnager{
+
+    public static function start(){
+        if(session_status()=== PHP_SESSION_NONE){
+            session_start();
+        }
+    }
     public function set(string $key, mixed $value):void{
         $_SESSION[$key] = $value;
     }

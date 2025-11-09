@@ -6,6 +6,7 @@ use App\Controllers\PostController;
 use App\Controllers\LinksControllers;
 use Framework\Middleware\Authenticated;
 use App\Controllers\AuthController;
+use Framework\Middleware\Guest;
 
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/about', [AboutController::class, 'index']);
@@ -18,6 +19,6 @@ $router->get('/links/edit', [LinksControllers::class, 'edit'], Authenticated::cl
 $router->put('/links/update', [LinksControllers::class, 'update'], Authenticated::class);// actualizar el link
 $router->delete('/links/delete', [LinksControllers::class, 'delete'], Authenticated::class);
 
-$router->get('/login', [AuthController::class, 'login']);
-$router->post('/login', [AuthController::class, 'authenticate']);
+$router->get('/login', [AuthController::class, 'login'], Guest::class);
+$router->post('/login', [AuthController::class, 'authenticate'], Guest::class);
 $router->post('/logout', [AuthController::class, 'logout'], Authenticated::class);
