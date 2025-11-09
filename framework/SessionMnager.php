@@ -11,7 +11,7 @@ class SessionMnager{
     }
 
     public function setFlash(string $key, mixed $value): void{
-        $this->set('flas_' . $key, $value);
+        $this->set('flash_' . $key, $value);
     }
 
     public function getFlash(string $key, mixed $default =null):mixed{

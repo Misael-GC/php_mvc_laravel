@@ -78,7 +78,7 @@ if (!function_exists('isAuthenticade')){
 
 if(!function_exists('back')){
     function back():void{
-        header('Locatio:' . $_SERVER['HTTP_REFERER'] ?? '/');
+        header('Location:' . $_SERVER['HTTP_REFERER'] ?? '/');
         exit;
     }
 }

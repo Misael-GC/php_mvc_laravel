@@ -22,7 +22,7 @@ class AuthController{
             );
 
             if($login){
-                redirect('/');
+                redirect('/'); 
             }
     }
 
